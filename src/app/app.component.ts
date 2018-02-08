@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import {PopularMoviesComponent} from './popular-movies/popular-movies.component';
+import {MoviesService} from './movies.service';
+import {IPopularMovie} from './popularMovie';
+
 
 @Component({
   selector: 'app-root',
@@ -7,9 +11,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Movie App';
-
-
-  //Declared the Array of popular movie name
-  movieNames = ['The Maze Runner','IT','Minions','Jumanji','Baby Driver'];
-
 }

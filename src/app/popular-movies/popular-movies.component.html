@@ -1,6 +1,6 @@
 <div>
-  <span>Movies:</span>
-  <select>
+  <select (change)="onChange($event.target.value)" [(ngModel)]="selectedElement.Name" class="styled">
     <option *ngFor="let movie of movies">{{movie.title}}</option>
   </select>
 </div>
+<button *ngIf="isSelected" (click)="clearDropDown()">Clear</button>

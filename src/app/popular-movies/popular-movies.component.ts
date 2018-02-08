@@ -1,38 +1,44 @@
-import { Component, OnInit } from '@angular/core';
-import {MoviesService} from '../movies.service';
-import {IPopularMovie} from '../popularMovie';
-
+import { Component, OnInit } from "@angular/core";
+import { MoviesService } from "../movies.service";
+import { IPopularMovie } from "../popularMovie";
 
 @Component({
-  selector: 'app-popular-movies',
-  templateUrl: './popular-movies.component.html',
-  styleUrls: ['./popular-movies.component.css']
+  selector: "popular-movies-dropdown",
+  templateUrl: "./popular-movies.component.html",
+  styleUrls: ["./popular-movies.component.css"]
 })
-export class PopularMoviesComponent {
 
-  isSelected = false;
-  selectedElement:any= {Name:'Movies'};
+export class PopularMoviesComponent {
+  selectedMovieTitle: string;
+  showDropped: boolean;
+  private movies: IPopularMovie[] = [];
+  private errorMessage: any = "";
 
   constructor(private _movieDataService: MoviesService) {
     this.getMovies();
+    this.selectedMovieTitle = "";
+    this.showDropped = false;
   }
-
-  private movies: IPopularMovie[] = [];
-  private errorMessage: any = '';
 
   getMovies() {
-    this._movieDataService.getData().subscribe(
-      movies => this.movies = movies,
-      error => this.errorMessage = <any>error);
+    this._movieDataService
+      .getData()
+      .subscribe(
+        movies => (this.movies = movies),
+        error => (this.errorMessage = <any>error)
+      );
   }
 
-  onChange(deviceValue) {
-    console.log(deviceValue);
-    this.isSelected = true;
-}
+  movieSelected(title: string) {
+    this.selectedMovieTitle = title;
+    this.toggleDropdown();
+  }
 
-  clearDropDown(){
-    this.selectedElement = {Name:'Movies'};
-    console.log("clear drop down");
+  toggleDropdown() {
+    this.showDropped = !this.showDropped;
+  }
+
+  clearDropDown() {
+    this.selectedMovieTitle = "";
   }
 }

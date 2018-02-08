@@ -1,6 +1,7 @@
-<div>
-  <select (change)="onChange($event.target.value)" [(ngModel)]="selectedElement.Name" class="styled">
-    <option *ngFor="let movie of movies">{{movie.title}}</option>
-  </select>
+<div class="popular-movies-dropdown">
+  <div class="name-selected" (click)="toggleDropdown()">Selected : {{selectedMovieTitle}} </div>
+  <ul [ngClass]=" { 'dropped' : showDropped, 'names-list' : true }">
+    <li *ngFor="let movie of movies" (click)="movieSelected(movie.title)">{{movie.title}} </li>
+  </ul>
 </div>
-<button *ngIf="isSelected" (click)="clearDropDown()">Clear</button>
+<span *ngIf="selectedMovieTitle.length!=0" (click)="clearDropDown()" class="clearSpan">Clear</span>
